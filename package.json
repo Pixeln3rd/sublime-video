@@ -1,0 +1,13 @@
+{
+  "name": "sublime-video",
+  "version": "1.1.0",
+  "private": true,
+  "devDependencies": {
+    "sass": "^1.77.0"
+  },
+  "scripts": {
+    "build:css": "sass scss/sublime-video.scss dist/sublime-video.css --style=compressed",
+    "build:watch": "sass scss/sublime-video.scss dist/sublime-video.css --watch",
+    "build": "npm run build:css"
+  }
+}

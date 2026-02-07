@@ -1,0 +1,19 @@
+:root {
+  --sv-accent: #7c3aed;
+  --sv-bg: rgba(0, 0, 0, 0.55);
+  --sv-fg: rgba(255, 255, 255, 0.92);
+  --sv-fg-muted: rgba(255, 255, 255, 0.68);
+
+  --sv-radius: 14px;
+  --sv-pad: 10px;
+  --sv-gap: 10px;
+
+  --sv-control-h: 42px;
+  --sv-scrub-h: 6px;
+
+  --sv-popover-bg: rgba(10, 10, 12, 0.92);
+  --sv-popover-border: rgba(255, 255, 255, 0.12);
+  --sv-popover-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+
+  --sv-progress: 0%;
+}

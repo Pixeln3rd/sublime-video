@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sublime Video — Custom HTML5 Video Player</title>
+  <meta name="description" content="Sublime Video is a lightweight, CSS-skinnable custom HTML5 video player with modern controls." />
+
+  <link rel="stylesheet" href="./dist/sublime-video.css" />
+  <script defer src="./dist/sublime-video.js"></script>
+
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #0b0b10;
+      color: rgba(255,255,255,0.92);
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 64px; }
+    header { display: flex; gap: 16px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
+    h1 { margin: 0; font-size: 34px; letter-spacing: -0.4px; }
+    .sub { margin: 6px 0 0; color: rgba(255,255,255,0.68); }
+    .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 14px; border-radius: 12px; text-decoration: none;
+      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn:hover { background: rgba(255,255,255,0.14); }
+    section { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.10); }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    pre {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 14px; border-radius: 14px; overflow: auto;
+    }
+    .grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+    @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.10); vertical-align: top; }
+    th { color: rgba(255,255,255,0.75); font-weight: 600; }
+    .hint { color: rgba(255,255,255,0.68); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Sublime Video</h1>
+        <p class="sub">A lightweight, CSS-skinnable custom HTML5 video player.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="./dist/sublime-video.js" download>Download JS</a>
+        <a class="btn" href="./dist/sublime-video.css" download>Download CSS</a>
+        <a class="btn" href="#docs">Docs</a>
+        <a class="btn" href="#options">Options</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Demo</h2>
+      <div class="grid">
+        <div>
+          <video
+            class="sblm-video"
+            src="./sublimefox-placeholder.mp4"
+            poster="./sublimefox-placeholder.jpg"
+            preload="metadata"
+            data-theme="emerald"
+            data-accent="#22c55e"
+            data-skip="10"
+            data-autohide="true"
+            data-hotkeys="true"
+          ></video>
+          <p class="hint">Tip: Click video to play/pause. Hotkeys: <b>K/Space</b> play/pause, <b>←/→</b> skip, <b>M</b> mute, <b>F</b> fullscreen.</p>
+        </div>
+
+        <div>
+          <h3>Why Sublime Video?</h3>
+          <ul>
+            <li>Drop-in: add a class to your <code>&lt;video&gt;</code></li>
+            <li>Skinnable: theme everything via CSS variables</li>
+            <li>Responsive: flex layout, sane mobile fallbacks</li>
+            <li>Accessible: focusable wrapper + aria-labels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="docs">
+      <h2>Getting started</h2>
+      <pre><code>&lt;link rel="stylesheet" href="/path/dist/sublime-video.css"&gt;
+&lt;script defer src="/path/dist/sublime-video.js"&gt;&lt;/script&gt;
+
+&lt;video class="sblm-video"
+  src="/media/video.mp4"
+  poster="/media/poster.jpg"
+  preload="metadata"
+  data-theme="emerald"
+  data-accent="#22c55e"
+  data-skip="10"&gt;
+&lt;/video&gt;</code></pre>
+
+      <h3>Programmatic API</h3>
+      <pre><code>// Default manager:
+const mgr = window.SublimeVideo.manager;
+
+const video = document.querySelector('video.sblm-video');
+const player = mgr.get(video);
+
+player.play();
+player.pause();
+player.seekBy(10);
+player.setAccent('#ef4444');</code></pre>
+    </section>
+
+    <section id="options">
+      <h2>Options</h2>
+      <p class="hint">
+        Configure Sublime Video via <code>data-*</code> attributes on the <code>&lt;video&gt;</code>.
+        Themes are CSS variables (preset or custom).
+      </p>
+
+      <h3>Core data-attributes</h3>
+      <table>
+        <thead>
+          <tr><th>Attribute</th><th>What it does</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>data-accent</code></td>
+            <td>Sets the player accent color (<code>--sv-accent</code>).</td>
+            <td><code>data-accent="#22c55e"</code></td>
+          </tr>
+          <tr>
+            <td><code>data-theme</code></td>
+            <td>Applies a preset theme class (ex: <code>.sv-theme-emerald</code>).</td>
+            <td><code>data-theme="emerald"</code></td>
+          </tr>
+          <tr>
+            <td><code>data-autohide</code></td>
+            <td>Auto-hides controls while playing when idle.</td>
+            <td><code>data-autohide="true"</code></td>
+          </tr>
+          <tr>
+            <td><code>data-hotkeys</code></td>
+            <td>Enables keyboard shortcuts on the player (when focused).</td>
+            <td><code>data-hotkeys="true"</code></td>
+          </tr>
+          <tr>
+            <td><code>data-skip</code></td>
+            <td>Default skip step for skip buttons (seconds). User can change in Settings.</td>
+            <td><code>data-skip="10"</code></td>
+          </tr>
+          <tr>
+            <td><code>data-pip</code></td>
+            <td>Shows Picture-in-Picture button if supported.</td>
+            <td><code>data-pip="true"</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Settings popover</h3>
+      <ul>
+        <li><b>Skip Buttons</b>: 10s / 30s / 60s / 90s</li>
+        <li><b>Playback Speed</b>: 0.75x / 1x / 1.25x / 1.5x / 2x</li>
+      </ul>
+      <p class="hint">
+        Settings persist using <code>localStorage</code> (per browser).
+      </p>
+
+      <h3>Theming</h3>
+      <p class="hint">
+        Themes are just CSS variables — use presets or create your own:
+      </p>
+      <pre><code>/* Example: custom theme */
+.my-sv-theme {
+  --sv-accent: #ef4444;
+  --sv-bg: rgba(0,0,0,0.62);
+  --sv-radius: 18px;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>License</h2>
+      <p class="hint">Pick whatever you want (MIT is a common default for libraries).</p>
+    </section>
+  </div>
+</body>
+</html>
